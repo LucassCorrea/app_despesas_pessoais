@@ -98,6 +98,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hello World'**
   String get helloWorld;
+
+  /// No description provided for @valor_produto.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}'**
+  String valor_produto(double value);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

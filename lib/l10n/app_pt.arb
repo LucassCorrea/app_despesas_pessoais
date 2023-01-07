@@ -1,5 +1,14 @@
 {
     "@@locale": "pt",
 
-    "helloWorld" : "Olá mundo"
+    "helloWorld" : "Olá mundo",
+    "valor_produto": "{value}",
+    "@valor_produto": {
+        "placeholders": {
+            "value": {
+                "type": "double",
+                "format": "currency"
+            }
+        }
+    }
 }
