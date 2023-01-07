@@ -1,5 +1,6 @@
 import 'package:app_despesas_pessoais/models/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 main() => runApp(const ExpensesApp());
 
@@ -9,6 +10,8 @@ class ExpensesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
