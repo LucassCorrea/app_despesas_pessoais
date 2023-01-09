@@ -10,12 +10,24 @@ class ExpensesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final ThemeData tema = ThemeData();
+
+    return MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       // locale: const Locale("en", ""),
-      home: HomePage(),
+      home: const HomePage(),
       debugShowCheckedModeBanner: false,
+      theme: tema.copyWith(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.purple,
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.purple,
+        ),
+        textTheme: TextTheme(),
+        colorScheme: tema.colorScheme.copyWith(),
+      ),
     );
   }
 }

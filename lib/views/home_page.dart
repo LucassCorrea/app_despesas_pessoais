@@ -39,6 +39,11 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _transactions.add(newTransaction);
     });
+
+    // criar um verificador se o usuário deseja add mais contas,
+    // para ficar marcado e não sair do modal.
+    // um checkbox, talvez.
+    Navigator.of(context).pop();
   }
 
   _openTransactionFormModal(BuildContext context) {
