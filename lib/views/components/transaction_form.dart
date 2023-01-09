@@ -1,18 +1,29 @@
 import 'package:flutter/material.dart';
 
 class TransactionForm extends StatelessWidget {
-  const TransactionForm({
+  TransactionForm({
     super.key,
     required this.onSubmit,
   });
 
   final void Function(String, double) onSubmit;
 
+  final titleController = TextEditingController();
+  final valueController = TextEditingController();
+
+  _submitForm() {
+    final title = titleController.text;
+    final value = double.tryParse(valueController.text) ?? 0.0;
+
+    if (title.isEmpty || value <= 0) {
+      return;
+    }
+
+    onSubmit(title, value);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final titleController = TextEditingController();
-    final valueController = TextEditingController();
-
     return Card(
       elevation: 5,
       child: Padding(
@@ -21,12 +32,16 @@ class TransactionForm extends StatelessWidget {
           children: [
             TextField(
               controller: titleController,
+              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(
                 labelText: "Título",
               ),
             ),
             TextField(
               controller: valueController,
+              // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              onSubmitted: (_) => _submitForm(),
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 labelText: "Valor (R\$)",
               ),
@@ -38,11 +53,7 @@ class TransactionForm extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                   ),
-                  onPressed: () {
-                    final title = titleController.text;
-                    final value = double.tryParse(valueController.text) ?? 0.0;
-                    onSubmit(title, value);
-                  },
+                  onPressed: _submitForm,
                   child: const Text(
                     "Nova Transação",
                     style: TextStyle(
