@@ -29,8 +29,8 @@ class TransactionList extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.purple,
                       width: 2,
+                      color: Colors.purple,
                     ),
                   ),
                   padding: const EdgeInsets.all(10),
@@ -39,7 +39,6 @@ class TransactionList extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.purple,
                     ),
                   ),
                 ),
@@ -52,6 +51,7 @@ class TransactionList extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
+                        color: Colors.black,
                       ),
                     ),
                     Text(

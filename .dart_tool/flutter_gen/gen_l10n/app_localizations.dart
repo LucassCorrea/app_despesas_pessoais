@@ -95,13 +95,13 @@ abstract class AppLocalizations {
 
   /// No description provided for @helloWorld.
   ///
-  /// In en, this message translates to:
-  /// **'Hello World'**
+  /// In pt, this message translates to:
+  /// **'Olá mundo'**
   String get helloWorld;
 
   /// No description provided for @valor_produto.
   ///
-  /// In en, this message translates to:
+  /// In pt, this message translates to:
   /// **'{value}'**
   String valor_produto(double value);
 }

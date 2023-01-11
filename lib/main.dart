@@ -21,12 +21,22 @@ class ExpensesApp extends StatelessWidget {
       theme: tema.copyWith(
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.purple,
+          foregroundColor: Colors.white,
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Colors.purple,
+          foregroundColor: Colors.white,
         ),
-        textTheme: TextTheme(),
-        colorScheme: tema.colorScheme.copyWith(),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.purple,
+          ),
+        ),
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(
+            color: Colors.purple,
+          ),
+        ),
       ),
     );
   }

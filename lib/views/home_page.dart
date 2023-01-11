@@ -4,6 +4,7 @@ import 'package:app_despesas_pessoais/models/transaction.dart';
 import 'package:app_despesas_pessoais/views/components/transaction_form.dart';
 import 'package:app_despesas_pessoais/views/components/transaction_list.dart';
 import 'package:flutter/material.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -64,6 +65,10 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // SvgPicture.asset(
+            //   "assets/images/zzz.svg",
+            //   color: Colors.red,
+            // ),
             // Container(
             //   width: double.infinity,
             //   child: const Card(
