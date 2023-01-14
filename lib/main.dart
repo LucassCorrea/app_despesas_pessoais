@@ -19,6 +19,7 @@ class ExpensesApp extends StatelessWidget {
       home: const HomePage(),
       debugShowCheckedModeBanner: false,
       theme: tema.copyWith(
+        primaryColor: Colors.purple,
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.purple,
           foregroundColor: Colors.white,
@@ -29,12 +30,31 @@ class ExpensesApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.white,
             foregroundColor: Colors.purple,
+          ),
+        ),
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: Colors.black,
           ),
         ),
         textTheme: const TextTheme(
           bodyMedium: TextStyle(
             color: Colors.purple,
+            fontFamily: "OpenSans",
+            fontWeight: FontWeight.bold,
+          ),
+          labelMedium: TextStyle(
+            color: Colors.black,
+            fontFamily: "OpenSans",
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+          labelSmall: TextStyle(
+            color: Colors.black,
+            fontFamily: "OpenSans",
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:app_despesas_pessoais/models/transaction.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -13,60 +15,85 @@ class TransactionList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
-      child: ListView.builder(
-        itemCount: transactions.length,
-        itemBuilder: (context, index) {
-          final tr = transactions[index];
-          return Card(
-            child: Row(
-              children: [
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 15,
-                    vertical: 10,
+    return LayoutBuilder(
+      builder: (context, constrains) {
+        return transactions.isEmpty
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    "assets/images/zzz.svg",
+                    semanticsLabel: "zzz",
+                    color: Colors.black,
+                    height: 50,
                   ),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 2,
-                      color: Colors.purple,
-                    ),
-                  ),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    AppLocalizations.of(context)!.valor_produto(tr.value),
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      tr.title,
-                      style: const TextStyle(
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
+                    child: Text(
+                      "Nenhuma transação cadastrada",
+                      style: TextStyle(
+                        fontFamily: 'OpenSans',
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
                         color: Colors.black,
                       ),
                     ),
-                    Text(
-                      DateFormat('dd/MM/yy').format(tr.date),
-                      style: const TextStyle(
-                        color: Colors.grey,
+                  ),
+                ],
+              )
+            : SizedBox(
+                height: 400,
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return Divider(
+                      height: 5,
+                      color: Colors.grey[350],
+                    );
+                  },
+                  itemCount: transactions.length,
+                  itemBuilder: (context, index) {
+                    final tr = transactions[index];
+                    return ListTile(
+                      leading: Container(
+                        height: 60,
+                        width: 80,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Theme.of(context).primaryColor,
+                            width: 2,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        alignment: Alignment.center,
+                        child: AutoSizeText(
+                          AppLocalizations.of(context)!.valor_produto(tr.value),
+                          maxLines: 1,
+                          minFontSize: 1,
+                          maxFontSize: 20,
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-      ),
+                      title: AutoSizeText(
+                        tr.title,
+                        minFontSize: 1,
+                        maxFontSize: 18,
+                        maxLines: 1,
+                        style: Theme.of(context).textTheme.labelMedium,
+                      ),
+                      subtitle: AutoSizeText(
+                        DateFormat('dd/MM/yy').format(tr.date),
+                        minFontSize: 1,
+                        maxFontSize: 12,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          color: Colors.grey,
+                          fontFamily: "OpenSans",
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              );
+      },
     );
   }
 }

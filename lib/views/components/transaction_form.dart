@@ -39,6 +39,7 @@ class _TransactionFormState extends State<TransactionForm> {
             TextField(
               controller: titleController,
               onSubmitted: (_) => _submitForm(),
+              style: Theme.of(context).textTheme.labelMedium,
               decoration: const InputDecoration(
                 labelText: "Título",
               ),
@@ -47,6 +48,7 @@ class _TransactionFormState extends State<TransactionForm> {
               controller: valueController,
               // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onSubmitted: (_) => _submitForm(),
+              style: Theme.of(context).textTheme.labelMedium,
               keyboardType: TextInputType.number,
               decoration: const InputDecoration(
                 labelText: "Valor (R\$)",
@@ -56,9 +58,7 @@ class _TransactionFormState extends State<TransactionForm> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white,
-                  ),
+                  style: ElevatedButton.styleFrom(),
                   onPressed: _submitForm,
                   child: const Text(
                     "Nova Transação",
