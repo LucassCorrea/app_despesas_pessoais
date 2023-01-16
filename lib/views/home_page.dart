@@ -15,26 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: 't0',
-      title: "Conta Antiga",
-      value: 310.76,
-      date: DateTime.now().subtract(const Duration(days: 33)),
-    ),
-    Transaction(
-      id: 't1',
-      title: "Novo Tênis de Corrida",
-      value: 310.76,
-      date: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-    Transaction(
-      id: 't2',
-      title: "Conta de Luz",
-      value: 211.30,
-      date: DateTime.now().subtract(const Duration(days: 4)),
-    )
-  ];
+  final List<Transaction> _transactions = [];
 
   List<Transaction> get _recentTransaction {
     return _transactions.where((tr) {
@@ -44,12 +25,12 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime date) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: date,
     );
 
     setState(() {
@@ -60,6 +41,14 @@ class _HomePageState extends State<HomePage> {
     // para ficar marcado e não sair do modal.
     // um checkbox, talvez.
     Navigator.of(context).pop();
+  }
+
+  _removeTransaction(String id) {
+    setState(() {
+      _transactions.removeWhere((tr) {
+        return tr.id == id;
+      });
+    });
   }
 
   _openTransactionFormModal(BuildContext context) {
@@ -97,7 +86,10 @@ class _HomePageState extends State<HomePage> {
                           //   children: [],
                           // ),
                           Chart(recentTransaction: _recentTransaction),
-                          TransactionList(transactions: _transactions),
+                          TransactionList(
+                            transactions: _transactions,
+                            removeTransactions: _removeTransaction,
+                          ),
                         ],
                       ),
                     ),

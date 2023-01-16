@@ -30,8 +30,8 @@ class ExpensesApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.purple,
+            backgroundColor: Colors.purple,
+            foregroundColor: Colors.white,
           ),
         ),
         inputDecorationTheme: const InputDecorationTheme(
@@ -44,6 +44,11 @@ class ExpensesApp extends StatelessWidget {
             color: Colors.purple,
             fontFamily: "OpenSans",
             fontWeight: FontWeight.bold,
+          ),
+          bodySmall: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
           ),
           labelMedium: TextStyle(
             color: Colors.black,
