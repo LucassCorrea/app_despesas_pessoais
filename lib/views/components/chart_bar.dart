@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChartBar extends StatelessWidget {
   const ChartBar({
@@ -22,7 +21,6 @@ class ChartBar extends StatelessWidget {
       child: Column(
         children: [
           AutoSizeText(
-            // AppLocalizations.of(context)!.valor_produto(value),
             value.toStringAsFixed(2),
             maxLines: 1,
             minFontSize: 5,

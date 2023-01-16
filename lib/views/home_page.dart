@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     }).toList();
   }
 
-  _addTransaction(String title, double value, DateTime date) {
+  _addTransaction(String title, double value, DateTime date, bool? isChecked) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
@@ -37,10 +37,11 @@ class _HomePageState extends State<HomePage> {
       _transactions.add(newTransaction);
     });
 
-    // criar um verificador se o usuário deseja add mais contas,
-    // para ficar marcado e não sair do modal.
-    // um checkbox, talvez.
-    Navigator.of(context).pop();
+    if (isChecked == false) {
+      Navigator.of(context).pop();
+    } else {
+      return;
+    }
   }
 
   _removeTransaction(String id) {
@@ -82,9 +83,6 @@ class _HomePageState extends State<HomePage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          // Row(
-                          //   children: [],
-                          // ),
                           Chart(recentTransaction: _recentTransaction),
                           TransactionList(
                             transactions: _transactions,

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -7,7 +8,7 @@ class TransactionForm extends StatefulWidget {
     required this.onSubmit,
   });
 
-  final void Function(String, double, DateTime) onSubmit;
+  final void Function(String, double, DateTime, bool?) onSubmit;
 
   @override
   State<TransactionForm> createState() => _TransactionFormState();
@@ -26,7 +27,7 @@ class _TransactionFormState extends State<TransactionForm> {
       return;
     }
 
-    widget.onSubmit(title, value, _selectedDate);
+    widget.onSubmit(title, value, _selectedDate, _isChecked);
   }
 
   _datePicker() {
@@ -46,6 +47,8 @@ class _TransactionFormState extends State<TransactionForm> {
     });
   }
 
+  bool? _isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -64,7 +67,6 @@ class _TransactionFormState extends State<TransactionForm> {
             ),
             TextField(
               controller: _valueController,
-              // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
               onSubmitted: (_) => _submitForm(),
               style: Theme.of(context).textTheme.labelMedium,
               keyboardType: TextInputType.number,
@@ -72,34 +74,61 @@ class _TransactionFormState extends State<TransactionForm> {
                 labelText: "Valor (R\$)",
               ),
             ),
-            SizedBox(
-              height: 70,
-              child: Row(
-                children: [
-                  Text(
-                    "Data selecionada: ${DateFormat("dd/MM/yy").format(_selectedDate)}",
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  OutlinedButton(
-                    onPressed: () {
-                      _datePicker();
-                    },
-                    child: const Text(
-                      "Selecionar Data",
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 14,
-                      ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: SizedBox(
+                height: 70,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          "Data selecionada: ${DateFormat("dd/MM/yy").format(_selectedDate)}",
+                          style: Theme.of(context).textTheme.bodySmall,
+                        ),
+                        OutlinedButton(
+                          onPressed: () {
+                            _datePicker();
+                          },
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.grey[300],
+                          ),
+                          child: const Text(
+                            "Selecionar Data",
+                            style: TextStyle(
+                              color: Colors.purple,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const AutoSizeText("Adicionar mais contas"),
+                        Checkbox(
+                          checkColor: Colors.white,
+                          activeColor: Theme.of(context).primaryColor,
+                          value: _isChecked,
+                          onChanged: (value) {
+                            setState(() {
+                              _isChecked = value;
+                            });
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 ElevatedButton(
-                  style: ElevatedButton.styleFrom(),
                   onPressed: _submitForm,
                   child: const Text(
                     "Nova Transação",
