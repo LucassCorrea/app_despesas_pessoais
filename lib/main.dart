@@ -37,6 +37,15 @@ class ExpensesApp extends StatelessWidget {
         inputDecorationTheme: const InputDecorationTheme(
           labelStyle: TextStyle(
             color: Colors.black,
+            fontSize: 14,
+          ),
+          counterStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 14,
+          ),
+          hintStyle: TextStyle(
+            color: Colors.black,
+            fontSize: 14,
           ),
         ),
         textTheme: const TextTheme(
