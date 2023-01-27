@@ -93,37 +93,39 @@ class _HomePageState extends State<HomePage> {
         appBar.preferredSize.height -
         MediaQuery.of(context).padding.top;
 
-    return Scaffold(
-      appBar: appBar,
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                if (_showChart || !isLandscape)
-                  SizedBox(
-                    height: avaliableHeight * (isLandscape ? .94 : .29),
-                    child: Chart(recentTransaction: _recentTransaction),
-                  ),
-                if (!_showChart || !isLandscape)
-                  SizedBox(
-                    height: avaliableHeight * (isLandscape ? .94 : .63),
-                    child: TransactionList(
-                      transactions: _transactions,
-                      removeTransactions: _removeTransaction,
+    return SafeArea(
+      child: Scaffold(
+        appBar: appBar,
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  if (_showChart || !isLandscape)
+                    SizedBox(
+                      height: avaliableHeight * (isLandscape ? .94 : .29),
+                      child: Chart(recentTransaction: _recentTransaction),
                     ),
-                  ),
-              ],
-            ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'btn_floating',
-        onPressed: () => _openTransactionFormModal(context),
-        child: const Icon(
-          Icons.add,
+                  if (!_showChart || !isLandscape)
+                    SizedBox(
+                      height: avaliableHeight * (isLandscape ? .94 : .63),
+                      child: TransactionList(
+                        transactions: _transactions,
+                        removeTransactions: _removeTransaction,
+                      ),
+                    ),
+                ],
+              ),
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          heroTag: 'btn_floating',
+          onPressed: () => _openTransactionFormModal(context),
+          child: const Icon(
+            Icons.add,
+          ),
         ),
       ),
     );
